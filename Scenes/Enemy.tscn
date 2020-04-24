@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Sprites/Enemy/EnemyBody.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Enemy/BatIdle.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 12.245, 11.1072 )
+
+[node name="Enemy" type="KinematicBody2D"]
+
+[node name="Body" type="Node2D" parent="."]
+
+[node name="Rider" type="Sprite" parent="Body"]
+texture = ExtResource( 1 )
+offset = Vector2( 10, 0 )
+
+[node name="Bat" type="Sprite" parent="Body"]
+texture = ExtResource( 2 )
+
+[node name="PhysicsShape" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 4.85 )
+shape = SubResource( 1 )

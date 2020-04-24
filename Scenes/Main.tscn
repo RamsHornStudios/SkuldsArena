@@ -1,0 +1,210 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Sprites/Tiles/96Platforms.png" type="Texture" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+# don't forget to use stretch mode 'viewport' and aspect 'ignore'
+onready var viewport = get_viewport()
+
+func _ready():
+	get_tree().connect(\"screen_resized\", self, \"_screen_resized\")
+
+func _screen_resized():
+	var window_size = OS.get_window_size()
+
+	# see how big the window is compared to the viewport size
+	# floor it so we only get round numbers (0, 1, 2, 3 ...)
+	var scale_x = floor(window_size.x / viewport.size.x)
+	var scale_y = floor(window_size.y / viewport.size.y)
+
+	# use the smaller scale with 1x minimum scale
+	var scale = max(1, min(scale_x, scale_y))
+
+	# find the coordinate we will use to center the viewport inside the window
+	var diff = window_size - (viewport.size * scale)
+	var diffhalf = (diff * 0.5).floor()
+
+	# attach the viewport to the rect we calculated
+	viewport.set_attach_to_screen_rect(Rect2(diffhalf, viewport.size * scale))
+"
+
+[sub_resource type="Curve" id=2]
+min_value = -200.0
+max_value = 200.0
+_data = [ Vector2( 0, 3.51999 ), 0.0, 0.0, 0, 0, Vector2( 0.683073, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 21.12 ), -14.5122, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=3]
+min_value = 0.5
+max_value = 1.5
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.585815, 1.5176 ), 2.10094, 0.0, 0, 0 ]
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+points = PoolVector2Array( 0, 40, 96, 40, 96, 72, 32, 64 )
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
+points = PoolVector2Array( 0, 40, 96, 40, 96, 80, 56, 72, 0, 72 )
+
+[sub_resource type="ConvexPolygonShape2D" id=6]
+points = PoolVector2Array( 0, 40, 96, 40, 96, 72, 40, 80, 0, 80 )
+
+[sub_resource type="ConvexPolygonShape2D" id=7]
+points = PoolVector2Array( 0, 40, 96, 40, 56, 64, 0, 72 )
+
+[sub_resource type="ConvexPolygonShape2D" id=8]
+points = PoolVector2Array( 0, 40, 96, 40, 96, 72, 32, 80, 0, 72 )
+
+[sub_resource type="TileSet" id=9]
+0/name = "96Platforms.png 0"
+0/texture = ExtResource( 2 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 96, 96, 96 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 4 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 4 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
+1/name = "96Platforms.png 1"
+1/texture = ExtResource( 2 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 96, 96, 96, 96 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape = SubResource( 5 )
+1/shape_one_way = false
+1/shape_one_way_margin = 1.0
+1/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 5 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+1/z_index = 0
+2/name = "96Platforms.png 2"
+2/texture = ExtResource( 2 )
+2/tex_offset = Vector2( 0, 0 )
+2/modulate = Color( 1, 1, 1, 1 )
+2/region = Rect2( 192, 96, 96, 96 )
+2/tile_mode = 0
+2/occluder_offset = Vector2( 0, 0 )
+2/navigation_offset = Vector2( 0, 0 )
+2/shape_offset = Vector2( 0, 0 )
+2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+2/shape = SubResource( 6 )
+2/shape_one_way = false
+2/shape_one_way_margin = 1.0
+2/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 6 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+2/z_index = 0
+3/name = "96Platforms.png 3"
+3/texture = ExtResource( 2 )
+3/tex_offset = Vector2( 0, 0 )
+3/modulate = Color( 1, 1, 1, 1 )
+3/region = Rect2( 288, 96, 96, 96 )
+3/tile_mode = 0
+3/occluder_offset = Vector2( 0, 0 )
+3/navigation_offset = Vector2( 0, 0 )
+3/shape_offset = Vector2( 0, 0 )
+3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+3/shape = SubResource( 7 )
+3/shape_one_way = false
+3/shape_one_way_margin = 1.0
+3/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 7 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+3/z_index = 0
+4/name = "96Platforms.png 4"
+4/texture = ExtResource( 2 )
+4/tex_offset = Vector2( 0, 0 )
+4/modulate = Color( 1, 1, 1, 1 )
+4/region = Rect2( 192, 0, 96, 96 )
+4/tile_mode = 0
+4/occluder_offset = Vector2( 0, 0 )
+4/navigation_offset = Vector2( 0, 0 )
+4/shape_offset = Vector2( 0, 0 )
+4/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+4/shape = SubResource( 8 )
+4/shape_one_way = false
+4/shape_one_way_margin = 1.0
+4/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 8 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+4/z_index = 0
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 720, 10 )
+
+[node name="Main" type="Node2D"]
+script = SubResource( 1 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2( 434.415, -12.5701 )
+scale = Vector2( 3, 3 )
+amount = 500
+lifetime = 20.0
+preprocess = 20.0
+randomness = 1.0
+emission_shape = 2
+emission_rect_extents = Vector2( 300, 1 )
+spread = 25.0
+gravity = Vector2( 0, 2.5 )
+linear_accel = 5.0
+linear_accel_curve = SubResource( 2 )
+scale_amount = 1.5
+scale_amount_random = 1.0
+scale_amount_curve = SubResource( 3 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 104.744, 180.359 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource( 9 )
+cell_size = Vector2( 96, 96 )
+format = 1
+tile_data = PoolIntArray( 131072, 0, 0, 131073, 1, 0, 131074, 2, 0, 131075, 3, 0, 131082, 0, 0, 131083, 1, 0, 131084, 3, 0, 131085, 6, 0, 262150, 0, 0, 262151, 4, 0, 262152, 3, 0, 327681, 5, 0, 327682, 6, 0, 327694, 5, 0, 393216, 0, 0, 393217, 1, 0, 393218, 2, 0, 393219, 3, 0, 393227, 0, 0, 393228, 1, 0, 393229, 2, 0, 393230, 3, 0, 458758, 5, 0, 458760, 5, 0, 458761, 6, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Temp Floor" type="StaticBody2D" parent="."]
+position = Vector2( 0, 270 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Temp Floor"]
+position = Vector2( 720, 550 )
+shape = SubResource( 10 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Temp Floor"]
+position = Vector2( 720, -282.57 )
+shape = SubResource( 10 )
